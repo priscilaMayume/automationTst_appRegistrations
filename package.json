@@ -4,7 +4,9 @@
   "description": "Project test app automation ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ios": "PLATFORM=iOS APP='resources/registrations-app.app' DEVICE='iPhone 15 Pro' AUTONAME=XCUITest VERSION=17.2 npx codeceptjs run --steps",
+    "android": "PLATFORM=Android APP='resources/app-registrations.apk' DEVICE=emulator-5554 PACKAGE=com.qazandoapp ACTIVITY=MainActivity AUTONAME=UiAutomator2 VERSION=13 npx codeceptjs run --steps "
   },
   "author": "",
   "license": "ISC",
