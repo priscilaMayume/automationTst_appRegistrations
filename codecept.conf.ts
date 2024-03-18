@@ -1,4 +1,8 @@
 import { setHeadlessWhen, setCommonPlugins } from '@codeceptjs/configure';
+import * as path from 'path';
+
+// const appPath = path.join(__dirname, 'resources/app-registrations.apk');
+const appPath = path.join(__dirname, 'resources/registrations-app.app');
 
 setHeadlessWhen(process.env.HEADLESS);
 setCommonPlugins();
@@ -9,8 +13,7 @@ export const config: CodeceptJS.MainConfig = {
   helpers: {
     Appium: {
       appiumV2: true, 
-    //  app: '/Users/priscilahirotsu/Downloads/appsqazando/app-release.apk',
-      app: '/Users/priscilahirotsu/Downloads/appsqazando/qazandoapp.app',
+      app: appPath,
       platform: 'iOS',
      // platform: 'Android',
       desiredCapabilities: {
