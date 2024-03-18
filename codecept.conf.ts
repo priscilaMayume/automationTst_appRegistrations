@@ -1,8 +1,7 @@
 import { setHeadlessWhen, setCommonPlugins } from '@codeceptjs/configure';
 import * as path from 'path';
 
-// const appPath = path.join(__dirname, 'resources/app-registrations.apk');
-const appPath = path.join(__dirname, 'resources/registrations-app.app');
+ const appPath = path.join(__dirname, process.env.APP);
 
 setHeadlessWhen(process.env.HEADLESS);
 setCommonPlugins();
@@ -14,16 +13,14 @@ export const config: CodeceptJS.MainConfig = {
     Appium: {
       appiumV2: true, 
       app: appPath,
-      platform: 'iOS',
-     // platform: 'Android',
+      platform: process.env.PLATFORM,
       desiredCapabilities: {
-       // appPackage: 'com.qazandoapp',
-      //  appActivity: 'MainActivity',
-       // deviceName: 'emulator-5554',
-        deviceName: 'iPhone 15 Pro',
-       // automationName: 'UiAutomator2',
-        automationName: 'XCUITest',
-        platformVersion: '17.2'
+        appPackage: process.env.PLATFORM == 'Android' ? process.env.PACKAGE : '',
+        appActivity: process.env.PLATFORM == 'Android' ? process.env.ACTVITY : '',
+        deviceName: process.env.DEVICE,
+        automationName: process.env.PLATFORM == 'Android' ? process.env.AUTONAME : 'XCUITest',
+        platformVersion: process.env.VERSION
+      
       }
     }
   },
