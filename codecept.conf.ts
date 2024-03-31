@@ -1,7 +1,6 @@
 const { setHeadlessWhen, setCommonPlugins } = require('@codeceptjs/configure');
 const path = require('path');
 
-//const appPath = path.join(__dirname, process.env.APP);
 const appPathAndroid = path.join(__dirname, '/resources/app-registrations.apk');
 const appPathIos = path.join(__dirname, '/resources/registrations-app.app');
 
@@ -9,6 +8,7 @@ const appPathIos = path.join(__dirname, '/resources/registrations-app.app');
 setHeadlessWhen(process.env.HEADLESS);
 setCommonPlugins();
 
+const { bootstrap, teardown } = require('./server/server');
 export const config: CodeceptJS.MainConfig = {
   tests: './steps/*_test.js',
   output: './output',
@@ -27,7 +27,8 @@ export const config: CodeceptJS.MainConfig = {
       }
     }
   },
-  bootstrap: null,
+  bootstrap: bootstrap,
+  teardown: teardown,
   mocha: {},
   plugins: {
     retryFailedStep: {
